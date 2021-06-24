@@ -1,4 +1,4 @@
-package br.com.kassioschaider.fakereddit.modal;
+package br.com.kassioschaider.fakereddit.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
