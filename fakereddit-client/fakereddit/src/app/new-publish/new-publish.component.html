@@ -1,12 +1,15 @@
-<form action="">
+<section class="container">
+  <form class="form-post" (ngSubmit)="publish()">
+    <h2 class="form-post__title">New Post</h2>
 
-    <h2>New Post</h2>
-
-    <div>
-      <label for="content">Content</label>
-      <textarea id="content" rows="5" cols="60" name="content">
-      </textarea>
+    <div class="form-field">
+      <label class="form-field__label" for="content">Content</label>
+      <textarea class="form-field__input" id="content" rows="5" cols="60" name="content">
+        </textarea>
     </div>
 
-    <button>Publish</button>
-</form>
+    <div class="button-wrapper">
+      <button class="button-publish">Publish</button>
+    </div>
+  </form>
+</section>
