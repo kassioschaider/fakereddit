@@ -16,7 +16,7 @@ class PostRepositoryTest {
     private PostRepository postRepository;
 
     @Test
-    public void shouldSavePostTest() {
+    void shouldSavePostTest() {
         var post = new Post();
         post.setContent("CONTENT TEST 1");
 
@@ -27,7 +27,7 @@ class PostRepositoryTest {
     }
 
     @Test
-    public void shouldGetPostsTest() {
+    void shouldGetPostsTest() {
         var post = new Post();
         post.setContent("CONTENT TEST 1");
         var post2 = new Post();
@@ -49,7 +49,7 @@ class PostRepositoryTest {
     }
 
     @Test
-    public void shouldAddUpvoteToPost() {
+    void shouldAddUpvoteToPost() {
         var post = new Post();
         post.setContent("CONTENT TEST 1");
         var postReturned = postRepository.save(post);

@@ -33,7 +33,7 @@ class PostControllerTest {
     private static URI uri;
 
     @BeforeAll
-    public static void init() throws URISyntaxException {
+    static void init() throws URISyntaxException {
         uri = new URI("/api/posts");
     }
 

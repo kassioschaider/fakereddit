@@ -26,7 +26,7 @@ class PostMapperTest {
     private static List<PostDTO> postDTOList;
 
     @BeforeAll
-    public static void init() {
+    static void init() {
         post = new Post(1L, "CONTENT TEST 1", 1);
         Post post2 = new Post(2L, "CONTENT TEST 2", 2);
         Post post3 = new Post(3L, "CONTENT TEST 3", 3);
@@ -41,7 +41,7 @@ class PostMapperTest {
     }
 
     @Test
-    public void shouldConvertFromPostToPostDTO() {
+    void shouldConvertFromPostToPostDTO() {
         var newPostDto = postMapper.toDto(post);
 
         assertEquals(1L, newPostDto.getId());
@@ -50,7 +50,7 @@ class PostMapperTest {
     }
 
     @Test
-    public void shouldConvertFromPostDTOToPost() {
+    void shouldConvertFromPostDTOToPost() {
         var newPost = postMapper.toEntity(postDTO);
 
         assertEquals(1L, newPost.getId());
@@ -59,7 +59,7 @@ class PostMapperTest {
     }
 
     @Test
-    public void shouldConvertFromPostArrayToPostDTOArray() {
+    void shouldConvertFromPostArrayToPostDTOArray() {
         var newPostDTOList = postMapper.toDto(postList);
 
         assertEquals(3, newPostDTOList.size());
@@ -78,7 +78,7 @@ class PostMapperTest {
     }
 
     @Test
-    public void shouldConvertFromPostDTOArrayToPostArray() {
+    void shouldConvertFromPostDTOArrayToPostArray() {
         var newPostList = postMapper.toEntity(postDTOList);
 
         assertEquals(3, newPostList.size());
