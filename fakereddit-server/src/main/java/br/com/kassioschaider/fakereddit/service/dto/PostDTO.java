@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -21,6 +20,5 @@ public class PostDTO {
     @Length(min = 3, message = "Must have at least 3 characters!")
     private String content;
 
-    @NotNull(message = "It cannot be null!")
     private int upvotes;
 }
