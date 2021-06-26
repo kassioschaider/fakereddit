@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class PostController {
 
     @PostMapping("/posts")
     @Transactional
-    public ResponseEntity<PostDTO> add(@RequestBody PostDTO postDTO, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<PostDTO> add(@RequestBody @Valid PostDTO postDTO, UriComponentsBuilder uriBuilder) {
         var result = postService.add(postDTO);
         return ResponseEntity.created(uriBuilder.path("/posts/{id}")
                 .buildAndExpand(result.getId()).toUri())
