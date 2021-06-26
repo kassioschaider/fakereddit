@@ -5,23 +5,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -82,14 +77,18 @@ class PostControllerTest {
     }
 
     @Test
-    void shouldThrowsMethodArgumentNotValidException() throws Exception{
-       assertThrows(MethodArgumentNotValidException.class,
-               () -> mockMvc.perform(MockMvcRequestBuilders.post(uri)
-                       .contentType(MediaType.APPLICATION_JSON_VALUE)
-                       .content("{\"content\": \"\"}"))
-                       .andDo(MockMvcResultHandlers.print())
-                       .andExpect(MockMvcResultMatchers.status().is(201))
-                       .andReturn());
+    void shouldReturnMessageFiledErrors() throws Exception{
+        var mvcResultRegister = mockMvc.perform(MockMvcRequestBuilders.post(uri)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content("{\"content\": \"\"}"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().is(400))
+                .andReturn();
+
+        var content = mvcResultRegister.getResponse().getContentAsString();
+
+        assertEquals("[{\"field\":\"Content\",\"error\":\"Must have at least 3 characters!\"},{\"field\":\"Content\",\"error\":\"Can not be empty!\"}]",
+                content);
     }
 
 }
