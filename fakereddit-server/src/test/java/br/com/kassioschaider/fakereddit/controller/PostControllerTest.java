@@ -15,11 +15,13 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -77,6 +79,17 @@ class PostControllerTest {
         var upvoteContent = mvcResultUpvote.getResponse().getContentAsString();
 
         assertEquals("1", upvoteContent);
+    }
+
+    @Test
+    void shouldThrowsMethodArgumentNotValidException() throws Exception{
+       assertThrows(MethodArgumentNotValidException.class,
+               () -> mockMvc.perform(MockMvcRequestBuilders.post(uri)
+                       .contentType(MediaType.APPLICATION_JSON_VALUE)
+                       .content("{\"content\": \"\"}"))
+                       .andDo(MockMvcResultHandlers.print())
+                       .andExpect(MockMvcResultMatchers.status().is(201))
+                       .andReturn());
     }
 
 }
