@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, Output } from "@angular/core";
+import { EventEmitter } from "@angular/core";
 
 @Component({
   selector: 'app-new-publish',
@@ -7,7 +8,18 @@ import { Component } from "@angular/core";
 })
 export class NewPublishComponent {
 
+  @Output() toPublish = new EventEmitter<any>();
+
+  content: string;
+
   publish() {
-    console.log('send');
+    this.toPublish.emit({
+      content: this.content
+    });
+    this.cleanField();
+  }
+
+  cleanField() {
+    this.content = '';
   }
 }

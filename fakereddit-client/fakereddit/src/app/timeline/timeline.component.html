@@ -1,0 +1,18 @@
+<table class="table">
+
+  <thead table__header>
+    <th class="table__header__content">Date</th>
+    <th class="table__header__content">Content</th>
+    <th class="table__header__content">Votes</th>
+  </thead>
+  <tbody *ngIf="posts?.length > 0; else emptyPosts">
+    <tr class="table__line" *ngFor="let post of posts">
+      <td class="table__content">{{ post?.date | date: "short" }}</td>
+      <td class="table__content">{{ post?.content }}</td>
+      <td class="table__content">{{ post?.votes }}</td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #emptyPosts>
+  <p>Empty timeline!</p>
+</ng-template>
