@@ -32,7 +32,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public int addVote(int postId) {
-        return 0;
+    public int addVote(Long postId) {
+        var post = postRepository.getById(postId);
+        post.setUpvotes(post.getUpvotes() + 1);
+        return post.getUpvotes();
     }
 }

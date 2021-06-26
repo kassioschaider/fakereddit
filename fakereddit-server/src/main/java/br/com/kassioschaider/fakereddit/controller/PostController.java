@@ -5,10 +5,10 @@ import br.com.kassioschaider.fakereddit.service.dto.PostDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -22,5 +22,23 @@ public class PostController {
     @GetMapping("/posts")
     public ResponseEntity<List<PostDTO>> getAll() {
         return ResponseEntity.ok(postService.getAll());
+    }
+
+    @PostMapping("/posts")
+    @Transactional
+    public ResponseEntity<PostDTO> add(@RequestBody PostDTO postDTO, UriComponentsBuilder uriBuilder) {
+        var result = postService.add(postDTO);
+        return ResponseEntity.created(uriBuilder.path("/posts/{id}")
+                .buildAndExpand(result.getId()).toUri())
+                .body(result);
+    }
+
+    @PutMapping("/posts/{id}/upvote")
+    @Transactional
+    public ResponseEntity<Integer> addVote(@PathVariable Long id, UriComponentsBuilder uriBuilder) {
+        var result = postService.addVote(id);
+        return ResponseEntity.created(uriBuilder.path("/posts")
+                .buildAndExpand(result).toUri())
+                .body(result);
     }
 }

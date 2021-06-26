@@ -10,5 +10,5 @@ public interface PostService {
 
     PostDTO add(PostDTO postDTO);
 
-    int addVote(int postId);
+    int addVote(Long postId);
 }
