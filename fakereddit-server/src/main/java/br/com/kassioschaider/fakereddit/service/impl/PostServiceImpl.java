@@ -27,7 +27,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO add(PostDTO postDTO) {
-        return null;
+        var post = postMapper.toEntity(postDTO);
+        return postMapper.toDto(postRepository.save(post));
     }
 
     @Override
