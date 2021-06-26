@@ -35,6 +35,8 @@ public class PostServiceImpl implements PostService {
     public int addVote(Long postId) {
         var post = postRepository.getById(postId);
         post.setUpvotes(post.getUpvotes() + 1);
-        return post.getUpvotes();
+        var postUpvoted = postRepository.save(post);
+
+        return postUpvoted.getUpvotes();
     }
 }
