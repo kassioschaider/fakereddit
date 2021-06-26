@@ -65,17 +65,18 @@ class PostControllerTest {
         var objectMapper = new ObjectMapper();
         var post = objectMapper.readValue(content, Post.class);
 
-        var mvcResultUpvote = mockMvc.perform(MockMvcRequestBuilders.put(
-                uri + "/" + post.getId() + "/upvote")
+        var upvoteUri = new URI(uri.getPath() + "/" + post.getId() + "/upvote");
+
+        var mvcResultUpvote = mockMvc.perform(MockMvcRequestBuilders.put(upvoteUri)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(""))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is(201))
                 .andReturn();
 
-        content = mvcResultUpvote.getResponse().getContentAsString();
+        var upvoteContent = mvcResultUpvote.getResponse().getContentAsString();
 
-        assertEquals(1, content);
+        assertEquals("1", upvoteContent);
     }
 
 }
