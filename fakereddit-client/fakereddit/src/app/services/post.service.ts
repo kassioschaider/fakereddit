@@ -25,4 +25,10 @@ export class PostService {
   addPost(post: Post): Observable<Post> {
     return this.httpClient.post<Post>(this.resouceUrl, JSON.stringify(post), this.httpOptions);
   }
+
+  upvote(idPost): Observable<Post> {
+    return this.httpClient.put<Post>(
+      this.resouceUrl + '/' + JSON.stringify(idPost) + '/upvote', this.httpOptions
+    );
+  }
 }

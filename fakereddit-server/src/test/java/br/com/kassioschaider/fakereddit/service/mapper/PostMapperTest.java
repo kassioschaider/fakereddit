@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,15 +28,15 @@ class PostMapperTest {
 
     @BeforeAll
     static void init() {
-        post = new Post(1L, "CONTENT TEST 1", 1);
-        Post post2 = new Post(2L, "CONTENT TEST 2", 2);
-        Post post3 = new Post(3L, "CONTENT TEST 3", 3);
+        post = new Post(1L, "CONTENT TEST 1", 1, LocalDateTime.now());
+        Post post2 = new Post(2L, "CONTENT TEST 2", 2, LocalDateTime.now());
+        Post post3 = new Post(3L, "CONTENT TEST 3", 3, LocalDateTime.now());
 
         postList = Arrays.asList(post, post2, post3);
 
-        postDTO = new PostDTO(1L, "CONTENT TEST 1", 1);
-        PostDTO postDTO2 = new PostDTO(2L, "CONTENT TEST 2", 2);
-        PostDTO postDTO3 = new PostDTO(3L, "CONTENT TEST 3", 3);
+        postDTO = new PostDTO(1L, "CONTENT TEST 1", 1, LocalDateTime.now());
+        PostDTO postDTO2 = new PostDTO(2L, "CONTENT TEST 2", 2, LocalDateTime.now());
+        PostDTO postDTO3 = new PostDTO(3L, "CONTENT TEST 3", 3, LocalDateTime.now());
 
         postDTOList = Arrays.asList(postDTO, postDTO2, postDTO3);
     }

@@ -1,20 +1,19 @@
 <section class="container">
   <h2 class="title">Timeline</h2>
-  <table class="table">
 
-    <thead table__header>
-      <th class="table__header__content">Date</th>
-      <th class="table__header__content">Content</th>
-      <th class="table__header__content">Upvotes</th>
-    </thead>
-    <tbody *ngIf="posts?.length > 0; else emptyPosts">
-      <tr class="table__line" *ngFor="let post of posts">
-        <td class="table__content">{{ post?.date | date: "short" }}</td>
-        <td class="table__content">{{ post?.content }}</td>
-        <td class="table__content">{{ post?.upvotes }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="timeline">
+    <div *ngIf="posts?.length > 0; else emptyPosts">
+      <div class="timeline__content" *ngFor="let post of posts">
+        <p class="">{{ post?.content }}</p>
+        <div class="timeline__votes">
+          <p>Votes {{ post?.upvotes }}</p>
+          <span (click)="upvote(post)" class="timeline__votes__icon"><i class="bi bi-arrow-up-circle-fill"></i></span>
+        </div>
+        <p class="timeline__publish">Publish in {{ post?.datePublish | date: "short"}}</p>
+      </div>
+    </div>
+  </div>
+
   <ng-template #emptyPosts>
     <p>Empty timeline!</p>
   </ng-template>

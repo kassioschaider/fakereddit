@@ -16,8 +16,8 @@ export class NewPublishComponent {
   publish() {
     const post: Post = { content: this.content };
 
-    this.service.addPost(post).subscribe(resultado => {
-      console.log(resultado);
+    this.service.addPost(post).subscribe(result => {
+      console.log(result);
       this.cleanField();
       this.router.navigateByUrl('timeline');
     },

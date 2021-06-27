@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,6 +28,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO add(PostDTO postDTO) {
+        postDTO.setDatePublish(LocalDateTime.now());
+        postDTO.setUpvotes(0);
         var post = postMapper.toEntity(postDTO);
         return postMapper.toDto(postRepository.save(post));
     }

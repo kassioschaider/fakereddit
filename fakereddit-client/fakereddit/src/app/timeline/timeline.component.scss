@@ -4,34 +4,33 @@
   margin-bottom: 16px;
 }
 
-.table {
+.timeline {
   text-align: center;
   margin: 0 auto;
   background-color: white;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 
-  &__header {
-    color: var(--primary);
-
-    &__content {
-      padding: 10px;
-      border-bottom: 2px solid green;
-    }
-  }
-
-  &__line {
-    margin-bottom: 10px;
-    border-radius: 4px;
-
-    &:last-child {
-      .tabela__conteudo {
-        border-bottom: none;
-      }
-    }
-  }
-
   &__content {
     padding: 10px;
     border-bottom: 1px solid var(--cinza-claro);
+  }
+
+  &__publish {
+    font-size: 12px;
+    color: blue;
+  }
+
+  &__votes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    align-content: stretch;
+    padding-top: 10px;
+
+    &__icon {
+      padding-left: 6px;
+    }
   }
 }

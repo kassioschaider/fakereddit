@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,4 +22,6 @@ public class PostDTO {
     private String content;
 
     private int upvotes;
+
+    private LocalDateTime datePublish;
 }
