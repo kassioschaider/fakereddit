@@ -1,5 +1,7 @@
-import { Component, Output } from "@angular/core";
-import { EventEmitter } from "@angular/core";
+import { Post } from './../models/post.model';
+import { PostService } from './../services/post.service';
+import { Component } from "@angular/core";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-publish',
@@ -7,16 +9,19 @@ import { EventEmitter } from "@angular/core";
   styleUrls: ['./new-publish.component.scss']
 })
 export class NewPublishComponent {
-
-  @Output() toPublish = new EventEmitter<any>();
-
   content: string;
 
+  constructor(private service: PostService, private router: Router) { }
+
   publish() {
-    this.toPublish.emit({
-      content: this.content
-    });
-    this.cleanField();
+    const post: Post = { content: this.content };
+
+    this.service.addPost(post).subscribe(resultado => {
+      console.log(resultado);
+      this.cleanField();
+      this.router.navigateByUrl('timeline');
+    },
+    (error) => console.log(error));
   }
 
   cleanField() {

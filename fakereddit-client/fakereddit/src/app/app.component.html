@@ -1,2 +1,7 @@
-<app-new-publish (toPublish)="publish($event)"></app-new-publish>
-<app-timeline [posts]="posts"></app-timeline>
+<header>
+  <a routerLink="timeline" routerLinkActive="active">Timeline</a>
+  <a routerLink="new-publish" routerLinkActive="active">New Post</a>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>

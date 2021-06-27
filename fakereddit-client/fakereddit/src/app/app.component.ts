@@ -1,3 +1,4 @@
+import { PostService } from './services/post.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,10 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fakereddit';
-  posts: any[] = [];
 
-  publish($event) {
-    const post = {...$event, date: new Date(), votes: 0}
-    this.posts.push(post);
-  }
+  constructor(private service: PostService) {}
 }

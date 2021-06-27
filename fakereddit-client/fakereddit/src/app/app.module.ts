@@ -8,6 +8,7 @@ import localePt from '@angular/common/locales/pt';
 import { AppComponent } from './app.component';
 import { NewPublishComponent } from './new-publish/new-publish.component';
 import { TimelineComponent } from './timeline/timeline.component';
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localePt, 'pt');
 
@@ -20,7 +21,8 @@ registerLocaleData(localePt, 'pt');
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
