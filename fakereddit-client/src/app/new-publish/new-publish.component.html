@@ -12,4 +12,8 @@
       <button class="button-publish">Publish</button>
     </div>
   </form>
+
+  <div *ngIf="errors">
+    <p class="error">{{errors}}</p>
+  </div>
 </section>

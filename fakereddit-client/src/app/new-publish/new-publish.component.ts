@@ -10,10 +10,12 @@ import { Router } from '@angular/router';
 })
 export class NewPublishComponent {
   content: string;
+  errors: string = '';
 
   constructor(private service: PostService, private router: Router) { }
 
   publish() {
+    this.errors = '';
     const post: Post = { content: this.content };
 
     this.service.addPost(post).subscribe(result => {
@@ -21,7 +23,11 @@ export class NewPublishComponent {
       this.cleanField();
       this.router.navigateByUrl('timeline');
     },
-    (error) => console.log(error));
+    (error) => {
+      error.error.forEach(e => {
+        this.errors = this.errors + e.field + ' - ' + e.error;
+      });
+    });
   }
 
   cleanField() {
