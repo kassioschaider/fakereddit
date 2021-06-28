@@ -1,4 +1,4 @@
-package br.com.kassioschaider.fakereddit.validation;
+package br.com.kassioschaider.fakereddit.config.validation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

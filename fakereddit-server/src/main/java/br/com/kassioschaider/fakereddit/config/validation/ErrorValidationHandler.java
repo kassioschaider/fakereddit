@@ -1,4 +1,4 @@
-package br.com.kassioschaider.fakereddit.validation;
+package br.com.kassioschaider.fakereddit.config.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
