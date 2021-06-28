@@ -4,6 +4,8 @@ import br.com.kassioschaider.fakereddit.service.PostService;
 import br.com.kassioschaider.fakereddit.service.dto.PostDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -21,12 +23,14 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/posts")
+    @Cacheable(value = "getAllPosts")
     public ResponseEntity<List<PostDTO>> getAll() {
         return ResponseEntity.ok(postService.getAll());
     }
 
     @PostMapping("/posts")
     @Transactional
+    @CacheEvict(value = "getAllPosts", allEntries = true)
     public ResponseEntity<PostDTO> add(@RequestBody @Valid PostDTO postDTO, UriComponentsBuilder uriBuilder) {
         var result = postService.add(postDTO);
         return ResponseEntity.created(uriBuilder.path("/posts/{id}")
@@ -36,6 +40,7 @@ public class PostController {
 
     @PutMapping("/posts/{id}/upvote")
     @Transactional
+    @CacheEvict(value = "getAllPosts", allEntries = true)
     public ResponseEntity<Integer> addVote(@PathVariable Long id, UriComponentsBuilder uriBuilder) {
         var result = postService.addVote(id);
         return ResponseEntity.created(uriBuilder.path("/posts")

@@ -15,7 +15,9 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getPosts().subscribe((posts: Post[]) => {
-      this.posts = posts;
+      this.posts = posts.sort((p1,p2) => {
+        return (p1.upvotes > p2.upvotes) ? -1 : 1;
+      });
     });
   }
 
