@@ -1,5 +1,6 @@
 package br.com.kassioschaider.fakereddit.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,4 @@ public class PostDTO {
     private String content;
 
     private int upvotes;
-
-    private LocalDateTime datePublish;
 }

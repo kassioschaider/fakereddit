@@ -28,7 +28,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO add(PostDTO postDTO) {
-        postDTO.setDatePublish(LocalDateTime.now());
         postDTO.setUpvotes(0);
         var post = postMapper.toEntity(postDTO);
         return postMapper.toDto(postRepository.save(post));

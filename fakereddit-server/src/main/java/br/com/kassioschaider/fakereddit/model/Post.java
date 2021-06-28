@@ -26,7 +26,4 @@ public class Post {
 
     @Column(name = "upvotes")
     private int upvotes;
-
-    @Column(name = "datePublish")
-    private LocalDateTime datePublish;
 }

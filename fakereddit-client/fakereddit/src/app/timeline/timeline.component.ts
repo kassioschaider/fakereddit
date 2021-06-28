@@ -15,9 +15,7 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getPosts().subscribe((posts: Post[]) => {
-      this.posts = posts.sort((p1,p2) => {
-        return (p1.datePublish.getTime > p2.datePublish.getMilliseconds) ? 1 : -1;
-      });
+      this.posts = posts;
     });
   }
 
