@@ -4,12 +4,14 @@ import br.com.kassioschaider.fakereddit.model.Post;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
+@ActiveProfiles("test")
 class PostRepositoryTest {
 
     @Autowired
@@ -22,6 +24,7 @@ class PostRepositoryTest {
 
         var postReturned = postRepository.save(post);
 
+        assertNotNull(postReturned);
         assertEquals(post.getContent(), postReturned.getContent());
         assertEquals(0, postReturned.getUpvotes());
     }
@@ -39,6 +42,7 @@ class PostRepositoryTest {
 
         var newPostList = postRepository.findAll();
 
+        assertNotNull(newPostList);
         assertEquals(3, newPostList.size());
         assertEquals(post.getContent(), newPostList.get(0).getContent());
         assertEquals(0, newPostList.get(0).getUpvotes());
@@ -57,8 +61,9 @@ class PostRepositoryTest {
         postReturned.setUpvotes(postReturned.getUpvotes() + 1);
         postRepository.save(postReturned);
         var optionalPost = postRepository.findById(postReturned.getId());
-        var newPost = optionalPost.get();
 
+        assertTrue(optionalPost.isPresent());
+        var newPost = optionalPost.get();
         assertEquals(1, newPost.getUpvotes());
     }
 
