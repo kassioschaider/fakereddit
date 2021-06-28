@@ -4,9 +4,9 @@
   <div class="timeline">
     <div *ngIf="posts?.length > 0; else emptyPosts">
       <div class="timeline__content" *ngFor="let post of posts">
-        <p class="">{{ post?.content }}</p>
+        <p class="timeline__content__content">{{ post?.content }}</p>
         <div class="timeline__votes">
-          <p>Votes {{ post?.upvotes }}</p>
+          <p class="timeline__votes__upvotes">Votes {{ post?.upvotes }}</p>
           <span (click)="upvote(post)" class="timeline__votes__icon"><i class="bi bi-arrow-up-circle-fill"></i></span>
         </div>
       </div>
@@ -14,6 +14,6 @@
   </div>
 
   <ng-template #emptyPosts>
-    <p>Empty timeline!</p>
+    <p class="empty-posts">Empty timeline!</p>
   </ng-template>
 </section>
