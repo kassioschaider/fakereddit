@@ -6,9 +6,9 @@ FakeReddit é um app para gerenciar postagens com a funcionalidade de Upvotes.
 
 ### Como instalar
 
-A prova foi desenvolvida usando Spring Boot 2.5.1 e Java 1.16 para uma API Rest.
+A prova foi desenvolvida usando Spring Boot 2.5.1 e Java 16 para uma API Rest.
 O front-end foi desenvolvido com Angular 10 e o banco de dados é PostgreSQL.
-Também há um docker-compose com um container com o banco de dados e outro com o Adminer para acesso.
+Também há um docker-compose com um container com o banco de dados (porta 5432) e outro com o Adminer para acesso (porta 8080).
 
 Foram utilizados do Spring Boot os módulos Starter JPA, DevTools, Starter Web, Starter Test, Starter Cache.
 Além do banco em memória H2 para testes, JUnit 5, Hibernate Validator e as bibliotecas MapStruct, Lombok e SpringFox.
@@ -42,3 +42,11 @@ O projeto a seguinte estrutura:
      - mapper: para a classe de mapeamento de conversão de DTO para Entity e Entity para DTO. Aqui é utilizado o EntityMapper para obter uma estrutura padrão
        das interfaces mapper. É utilizado a biblioteca MapStruct para o mapeamento.
    - util: pacotes com as classes e interfaces de suporte a API.
+
+### Possíveis Implementações Futuras
+
+- Containers para rodar Java e Angular.
+- Implementar a paginação no front-end e back-end.
+- Implementar usuário, login e autenticação stateless com Json Web Token.
+- Inserção de imagens e outras mídias nos Posts.
+- Layout da aplicação (sempre tem o que melhorar... hehe)
