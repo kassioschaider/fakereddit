@@ -16,8 +16,9 @@ Além do banco em memória H2 para testes, JUnit 5, Hibernate Validator e as bib
 Para executar o sistema e banco de dados, siga um dos passos abaixo:
  - Execute o comando "docker-compose up -d" no diretório do "fakereddit" para subir um container do Postgre e o Adminer;
  - Execute o comando "mvn clean install spring-boot:run" no diretório "fakereddit-server" para baixar dependências, rodar os testes e startar o back-end;
- - Execute o comando "npm start" no diretório "fakereddit-client" para baixar dependências, configurar o proxy e startar o front-end.
+ - Execute o comando "npm install" para instalar e "npm start" no diretório "fakereddit-client" configurar o proxy e startar o front-end.
  - Acesse http://localhost:4200/
+ - Caso deseje rodar os testes e2e use o comando "npm run e2e"
   
  Observação: a porta da API foi alterada para 8000 (ver "server.port" no application.properties).
  
