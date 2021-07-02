@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class ErrorValidationHandler {
@@ -29,6 +30,16 @@ public class ErrorValidationHandler {
             ErrorFormDTO error = new ErrorFormDTO(fieldToTitle(e.getField()), message);
             errorsFormDTO.add(error);
         });
+
+        return errorsFormDTO;
+    }
+
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NoSuchElementException.class)
+    public List<ErrorFormDTO> handle(NoSuchElementException exception) {
+        List<ErrorFormDTO> errorsFormDTO = new ArrayList<>();
+        ErrorFormDTO error = new ErrorFormDTO("PostId", exception.getMessage());
+        errorsFormDTO.add(error);
 
         return errorsFormDTO;
     }

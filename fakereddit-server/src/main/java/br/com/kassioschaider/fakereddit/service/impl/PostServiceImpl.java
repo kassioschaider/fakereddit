@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
@@ -34,10 +35,14 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public int addVote(Long postId) {
-        var post = postRepository.getById(postId);
-        post.setUpvotes(post.getUpvotes() + 1);
-        var postUpvoted = postRepository.save(post);
+        var optionalPost = postRepository.findById(postId);
 
-        return postUpvoted.getUpvotes();
+        if(optionalPost.isPresent()) {
+            optionalPost.get().setUpvotes(optionalPost.get().getUpvotes() + 1);
+            var postUpvoted = postRepository.save(optionalPost.get());
+            return postUpvoted.getUpvotes();
+        }
+
+        throw new NoSuchElementException("No such Post element by id " + postId + ".");
     }
 }
