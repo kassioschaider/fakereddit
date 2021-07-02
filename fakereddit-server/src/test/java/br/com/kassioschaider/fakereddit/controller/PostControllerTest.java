@@ -96,4 +96,24 @@ class PostControllerTest {
         assertEquals("Content", errors[0].getField());
         assertEquals("Must have at least 3 characters!", errors[0].getError());
     }
+
+    @Test
+    void shouldReturnNoSuchElementMessage() throws Exception{
+        var mvcResultRegister = mockMvc
+                .perform(MockMvcRequestBuilders.put(uri.getPath() + "/" + 82 + "/upvote")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content("{\"content\": \"Test\"}"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().is(404))
+                .andReturn();
+
+        var content = mvcResultRegister.getResponse().getContentAsString();
+
+        var objectMapper = new ObjectMapper();
+        var errors = objectMapper.readValue(content, ErrorFormDTO[].class);
+
+        assertEquals("PostId", errors[0].getField());
+        assertEquals("No such Post element by id 82.", errors[0].getError());
+    }
+
 }
