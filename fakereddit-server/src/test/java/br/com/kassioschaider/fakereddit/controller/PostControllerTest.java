@@ -1,7 +1,7 @@
 package br.com.kassioschaider.fakereddit.controller;
 
 import br.com.kassioschaider.fakereddit.model.Post;
-import br.com.kassioschaider.fakereddit.config.validation.ErroFormDTO;
+import br.com.kassioschaider.fakereddit.config.validation.ErrorFormDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -91,7 +91,7 @@ class PostControllerTest {
         var content = mvcResultRegister.getResponse().getContentAsString();
 
         var objectMapper = new ObjectMapper();
-        var errors = objectMapper.readValue(content, ErroFormDTO[].class);
+        var errors = objectMapper.readValue(content, ErrorFormDTO[].class);
 
         assertEquals("Content", errors[0].getField());
         assertEquals("Must have at least 3 characters!", errors[0].getError());

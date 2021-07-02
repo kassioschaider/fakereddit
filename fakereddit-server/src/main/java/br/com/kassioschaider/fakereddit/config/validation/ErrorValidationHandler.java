@@ -21,12 +21,12 @@ public class ErrorValidationHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<ErroFormDTO> handle(MethodArgumentNotValidException exception) {
-        List<ErroFormDTO> errorsFormDTO = new ArrayList<>();
+    public List<ErrorFormDTO> handle(MethodArgumentNotValidException exception) {
+        List<ErrorFormDTO> errorsFormDTO = new ArrayList<>();
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
         fieldErrors.forEach(e -> {
             String message = messageSource.getMessage(e, LocaleContextHolder.getLocale());
-            ErroFormDTO error = new ErroFormDTO(fieldToTitle(e.getField()), message);
+            ErrorFormDTO error = new ErrorFormDTO(fieldToTitle(e.getField()), message);
             errorsFormDTO.add(error);
         });
 
